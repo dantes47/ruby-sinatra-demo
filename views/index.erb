@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Todo App</title>
+  </head>
+  <body>
+    <h2>Hi From Sinatra App!</h2>
+    <ul class="list_group">
+      <% @data.each do |item| %>
+        <% if item["completed"] %>
+          <li>
+          <p><s><%= item["name"] %></s></p>
+        <% else %>
+          <p><%= item["name"]%></p>
+        <form method="POST" action="/done">
+          <input type="hidden" name="id" value="<%= item['id'] %>">
+          <input type="submit" value="Done">
+        </form>
+      <% end %>
+  
+        <form method="POST" action="/delete">
+          <input type="hidden" name="delete_id" value="<%= item['id'] %>">
+          <button name="delete_data">Delete</button>
+        </form>
+
+      <% end %>
+      </li>
+    </ul><hr>
+
+    <form method="POST" action="/item">
+      <p>Title: <input type="text" name="name" placeholder="Input here.."></p>
+      <input type="submit" value="Add">
+    </form>
+  </body>
+</html>
